@@ -228,7 +228,7 @@ To put in your YAML:
 
 - transition="zoom"
 
-To put between brakets after the title of the slide.
+To put between curly brackets after the title of the slide.
 
 ## Highliting specific code lines
 
@@ -255,6 +255,7 @@ You can use different combinations to obtain the desired effect.
 :::
 
 ## Highliting specific code lines {.unlisted}
+
 :::{.fragment .fade-in-then-out}
 ![](figures/high.png)
 :::

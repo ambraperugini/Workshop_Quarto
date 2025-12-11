@@ -4,13 +4,16 @@ author: "Ambra Perugini"
 format:
   html:
     code-line-numbers: false
-    theme: journal
+    theme:
+      light: journal
+      dark: darkly
     embed-resources: true
     code-fold: true
     code-overflow: wrap
     toc: true
-    toc-expand: false
+    toc-depth: 2
     bibliography: bibliography.bib
+    csl: apa.csl
     fontsize: 15pt
 execute:
   echo: true
@@ -39,7 +42,7 @@ editor: source
 
 - Promotes collaboration
 
-![](figures/collab.png){fig-align="center"}
+![](figures/collab.png){.absolute bottom=0 right=50 width="500" height="300"}
 
 ## Main feauters
 
@@ -87,10 +90,6 @@ It's the initial chunk that defines all meta-data and file formatting:
 
 - abstract: "a long text of my abstract"
 
-:::
-
-::: {.column width="50%"}
-
 - toc: true (table of content)
 
 - toc-title: Contents
@@ -98,6 +97,11 @@ It's the initial chunk that defines all meta-data and file formatting:
 - toc-location: left
 
 - number-sections: true
+
+
+:::
+
+::: {.column width="50%"}
 
 - embed-resources: true (to be able to share your file with all embedded resources without sharing the entire folder)
 
@@ -143,20 +147,21 @@ execute:
 
 ### Titles & Subtitles
 
-\# Main title
+```{.bash}
+# Main title
 
-\#\# Frist level subtitle
+## Frist level subtitle
 
-\#\#\# Second level subtitle
+### Second level subtitle
 
-\#\#\#\# Third level subtitle
+#### Third level subtitle
 
+This is an **example paragraph** with bold text.
 
-This is an \*\*example paragraph\*\* with bold text.
+*Italic* or `single spaced font` can be used as well.
 
-\*Italic\* or \`single spaced font\` cam be used as well.
+```
 
-\
 
 This is an **example paragraph** with bold text.
 
@@ -165,13 +170,15 @@ This is an **example paragraph** with bold text.
 
 Lists:
 
-\- Elements 
+```{.bash}
+- Elements 
+```
 
 - Elements
 
 This is a note^[that will be put at the end]
 
-And it's done in the followinf way: `^[the note]` and you put it next to the text where you want the note number to appear
+And it's done in the following way: `^[the note]` and you put it next to the text where you want the note number to appear
 
 ::: aside
 
@@ -179,7 +186,7 @@ Here is a side note
 
 :::
 
-```
+```{.bash}
 ::: aside
 
 Here is a side note
@@ -193,21 +200,18 @@ They are used to insert code and run analysis. A lot of options can be specified
 
 Example: 
 
-\```{r}
 
-\#| results: hide
+```{r}
+#| echo: fenced
+#| code-fold: false
+#| label: fig-name_of_figure
+#| fig-width: 8
+#| fig-height: 4
+#| fig-cap: Caption of the figure. 
 
-\#| echo: false
+plot(x = rnorm(10), y = rnorm(10,2,3))
 
-\#| label: fig-name_of_figure
-
-\#| fig-width: 8
-
-\#| fig-height: 4
-
-\#| fig-cap: Caption of the figure. 
-
-\```
+```
 
 
 You can put those parameters directly in your chunk.
@@ -262,7 +266,7 @@ Content 2:
 
 ::::
 
-```markdown
+```{.bash}
 :::: {.columns}
 
 ::: {.column width="50%"}
@@ -282,7 +286,7 @@ Content 2:
 
 I <span style="color:#ff4da6;">love</span> Quarto!
 
-```markdown
+```{.bash}
 I <span style="color:#ff4da6;">love</span> Quarto!
 ```
 
@@ -290,7 +294,7 @@ I <span style="color:#ff4da6;">love</span> Quarto!
 I am centered
 :::
 
-```
+```{.bash}
 ::: {style="text-align: center;"}
 I am centered
 :::
@@ -300,7 +304,7 @@ I am centered
 I am bigger
 :::
 
-```
+```{.bash}
 ::: {style="text-align: center; font-size: 2em;"}
 I am bigger
 :::
@@ -310,7 +314,7 @@ I am bigger
 I am bigger and pink
 :::
 
-```
+```{.bash}
 ::: {style="text-align: center; font-size: 2em; color: pink;"}
 I am bigger and pink
 :::
@@ -328,7 +332,7 @@ What is a CSS file?
 
 You can insert it in the quarto file in the following way:
 
-```
+```{.bash}
 format:
   html:
     css: stile.css
@@ -336,7 +340,7 @@ format:
 
 **Tiny example** of what you could put in the file:
 
-```
+```{.bash}
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -349,7 +353,15 @@ h1 {
 
 It is possible to create chunks to put CSS directly in Quarto:
 
-![](figures/css.png)
+```{css}
+#| echo: fenced
+
+h1 {
+  color: black;
+}
+
+```
+
 
 ## Images
 
@@ -368,7 +380,7 @@ You can specify precisly the position, width and height:
 ![](figures/letsgo.jpeg){.absolute bottom=0 right=50 width="250" height="150"}
 
 
-## Adding citations
+## Citations
 
 You can add citations contained in your .bib file as follows @scheel2021hypothesis, [@scheel2021hypothesis].
 
@@ -391,10 +403,10 @@ The use of a csl file for APA formatting of citations is necessary to ensure the
 The csl file (Citation Style Language) that you can find in the repository allows to correctly format in APA style your citations. 
 
 
-## Adding values in text directly form r objects
+## Values in text directly form r objects
 
 ```{r}
-#| echo = TRUE
+#| echo: fenced
 
 library(readxl)
 DATA <- read_xls(path = "data/Sara_dataset.xls")
@@ -408,9 +420,9 @@ cor_pre
 
 - correlazione tra Ansia pre e math quiz -> $r =$ `r cor_pre`
 
-````
-- correlazione tra Ansia pre e math quiz -> $r =$ `\r cor_pre\`
-````
+```{.bash}
+- correlazione tra Ansia pre e math quiz -> $r =$ `r cor_pre`
+```
 
 - `r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
 
@@ -552,28 +564,28 @@ critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
 :::
 ```
 
-## Cross-ref 
+## Cross-references
 
-Per capitoli e sezioni:
+They can be used for sections:
 
 ```{.bash}
 # Introduction {#sec-introduction}
 
-Vedi @sec-introduction per maggiori informazioni.
+See @sec-introduction for more informations.
 
 ```
 
-Per immagini:
+For images:
 
 ```{.bash}
 
 ![](fig.png){#fig-bho}
 
-Come visto in @fig-bho
+As shown in @fig-bho
 
 ```
 
-O tabelle:
+Or tables:
 
 ```{.bash}
 | Col1 | Col2 | Col3 |
@@ -582,12 +594,12 @@ O tabelle:
 | E    | F    | G    |
 | A    | G    | G    |
 
-: descrizione tabella {#tbl-lettere}
+: table description {#tbl-lettere}
 
-Vedi @tbl-lettere.
+See @tbl-lettere.
 ```
 
-Oppure:
+Or:
 
 ```{.bash}
 ::: {#tbl-lettere}
@@ -598,15 +610,15 @@ Oppure:
 | E    | F    | G    |
 | A    | G    | G    |
 
-Descrizione tabella
+Table description
 
 :::
 
-Vedi @tbl-lettere.
+See @tbl-lettere.
 
 ```
 
-Oppure per tabelle create nei chunk:
+For tables created in chunks:
 
 ```{.bash}
 #| label: tbl-iris
@@ -618,7 +630,6 @@ kable(head(iris))
 
 
 
-![](figures/happydog.gif){fig-align="center"}
 
 ## References
 

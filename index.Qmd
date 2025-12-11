@@ -38,9 +38,11 @@ embed-resources: true
 
 ### Useful links
 
--   Website to install git [**da qui**](https://git-scm.com/install/){target="_blank"}
+-   Website to install git [**from here**](https://git-scm.com/install/){target="_blank"}
 
 -   Quarto [**website**](https://quarto.org/docs/get-started/hello/rstudio.html){target="_blank"}
+
+-   APA useful formatting information at the following [**link**](https://wjschne.github.io/apaquarto/writing.html#tables){target="_blank"}
 
 Document types:
 
