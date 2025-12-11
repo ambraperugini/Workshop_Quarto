@@ -1,0 +1,626 @@
+---
+title: "Basics of Quarto"
+author: "Ambra Perugini"
+format:
+  html:
+    code-line-numbers: false
+    theme: journal
+    embed-resources: true
+    code-fold: true
+    code-overflow: wrap
+    toc: true
+    toc-expand: false
+    bibliography: bibliography.bib
+    fontsize: 15pt
+execute:
+  echo: true
+  output: true
+  warning: false
+editor: source
+---
+
+# What to expect from this workshop
+
+- To get a basic understanding of quarto syntax 
+
+- Learn how to integrate code to text and set up chunks
+
+- A bit of formatting for beginners 
+
+- Be able to create a complete report and a presentation
+
+# Key feauters of Quarto
+
+- Reproducible
+
+- Integrated
+
+- Flexible
+
+- Promotes collaboration
+
+![](figures/collab.png){fig-align="center"}
+
+## Main feauters
+
+- It supports different languages: R, Python, Julia, ObservableJS and more
+- It allows cross-referencing of equations, tables, images
+- All the meta-data is tidily organized in the YAML
+- With a single file you can create more output formats:
+- `html_document`
+- `pdf_document`
+- `word_document`
+- `revealjs`
+- `pptx`
+- `beamer`
+- You can also create projects such as books, websites, blogs
+
+## Impostazione di un progetto in RStudio
+
+1. Open **RStudio** and go to `File -> New Project`
+
+2. Choose **New Directory** and then `Quarto Project` (or Quarto book, Quarto website, ecc.)
+
+3. Choose where to setup your new folder
+
+4. Click **Create Project**
+
+**ALL SET**
+
+# Structure of a Quarto file (.qmd) 
+
+## YAML
+
+It's the initial chunk that defines all meta-data and file formatting:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- author: "My Name"
+
+- title: "My beaurtiful title"
+
+- subtitle: "A beautiful subtitle"
+
+- date: can be set to system date
+
+- abstract: "a long text of my abstract"
+
+:::
+
+::: {.column width="50%"}
+
+- toc: true (table of content)
+
+- toc-title: Contents
+
+- toc-location: left
+
+- number-sections: true
+
+- embed-resources: true (to be able to share your file with all embedded resources without sharing the entire folder)
+
+- execute: here you can set up all your defoult chunk options
+
+- cache: ture (it saves chunks outputs, useful to compile faster)
+
+- results: hide (to hide chunk's output, set to 'markup' to show output)
+
+- echo: false (to not show chunk code)
+
+- code-fold: true (to show chunk code by clicking on an icon)
+
+
+:::
+
+::::
+
+es:
+
+```yaml
+---
+title: "my html"
+subtitle: "Very nice subtitle"
+author: Your Name
+date:
+  format:
+    html:
+      toc: true
+      toc-title: Contents
+      toc-location: left
+      number-sections: true
+      embed-resources: true
+      code-fold: true
+execute:
+  cache: true
+  results: hide
+  echo: false
+---
+```
+
+## Document body 
+
+### Titles & Subtitles
+
+\# Main title
+
+\#\# Frist level subtitle
+
+\#\#\# Second level subtitle
+
+\#\#\#\# Third level subtitle
+
+
+This is an \*\*example paragraph\*\* with bold text.
+
+\*Italic\* or \`single spaced font\` cam be used as well.
+
+\
+
+This is an **example paragraph** with bold text.
+
+*Italic* or `single spaced font` can be used as well.
+
+
+Lists:
+
+\- Elements 
+
+- Elements
+
+This is a note^[that will be put at the end]
+
+And it's done in the followinf way: `^[the note]` and you put it next to the text where you want the note number to appear
+
+::: aside
+
+Here is a side note
+
+:::
+
+```
+::: aside
+
+Here is a side note
+
+:::
+```
+
+## Chunks
+
+They are used to insert code and run analysis. A lot of options can be specified.
+
+Example: 
+
+\```{r}
+
+\#| results: hide
+
+\#| echo: false
+
+\#| label: fig-name_of_figure
+
+\#| fig-width: 8
+
+\#| fig-height: 4
+
+\#| fig-cap: Caption of the figure. 
+
+\```
+
+
+You can put those parameters directly in your chunk.
+
+## Equations
+
+- Equations in a new row: `$$…$$`
+- Inline equations `$…$`
+
+:::{style="text-align: center;"}
+
+`$$ Y = \beta_{0} + \beta_{1} X $$`
+
+:::
+
+$$ Y = \beta_{0} + \beta_{1} X$$
+
+Easy shortcuts
+
+1. To insert chunks `Ctrl + Alt + I` (Windows) `Cmd + Option + I` (Mac)
+2. Per eseguire i blocchi di codice, usa `Ctrl + Invio` (Windows) o `Cmd + Invio` (Mac)
+3. Per generare il documento finale, clicca su `Render` (Quarto)
+
+
+## Columns
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Content 1:
+
+- Point 1
+
+- Point 2
+
+- Point 3
+
+:::
+
+::: {.column width="50%"}
+
+Content 2:
+
+- Point 1
+
+- Point 2
+
+- Point 3
+
+:::
+
+::::
+
+```markdown
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+:::
+
+::: {.column width="50%"}
+
+
+:::
+
+::::
+```
+
+## Colored text
+
+I <span style="color:#ff4da6;">love</span> Quarto!
+
+```markdown
+I <span style="color:#ff4da6;">love</span> Quarto!
+```
+
+::: {style="text-align: center;"}
+I am centered
+:::
+
+```
+::: {style="text-align: center;"}
+I am centered
+:::
+```
+
+::: {style="text-align: center; font-size: 2em;"}
+I am bigger
+:::
+
+```
+::: {style="text-align: center; font-size: 2em;"}
+I am bigger
+:::
+```
+
+::: {style="text-align: center; font-size: 2em; color: pink;"}
+I am bigger and pink
+:::
+
+```
+::: {style="text-align: center; font-size: 2em; color: pink;"}
+I am bigger and pink
+:::
+```
+
+## CSS for more extensive style formatting
+
+What is a CSS file?
+
+- CSS (Cascading Style Sheets) is a programming language used to format an html document or revealjs.
+
+- CSS files have the .css extension and they contain roules of style applicable to html elements.
+
+- They allow to separate the content of your document from the formatting parts, improving code mantainance
+
+You can insert it in the quarto file in the following way:
+
+```
+format:
+  html:
+    css: stile.css
+```
+
+**Tiny example** of what you could put in the file:
+
+```
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+h1 {
+  color: darkred;
+  text-align: center;
+}
+```
+
+It is possible to create chunks to put CSS directly in Quarto:
+
+![](figures/css.png)
+
+## Images
+
+This is how to insert images
+
+```markdown
+![](figures/magic.png){fig-align="center"}
+```
+
+![](figures/magic.jpeg){fig-align="center"}
+
+You can specify precisly the position, width and height:
+
+`![](figures/letsgo.jpeg){.absolute bottom=0 right=50 width="300" height="300"}`
+
+![](figures/letsgo.jpeg){.absolute bottom=0 right=50 width="250" height="150"}
+
+
+## Adding citations
+
+You can add citations contained in your .bib file as follows @scheel2021hypothesis, [@scheel2021hypothesis].
+
+
+```markdown
+@scheel2021hypothesis to cite in text
+[@scheel2021hypothesis] to cite between brakets
+```
+
+All the references are automatically put in a section at the end of your document. You can create a new .bib file by openinf a txt file and then saving it with the .bib extension. It is very important to specify in your **YAML** your file and it's directory in the followinf way:
+
+`bibliography: "my_bib.bib"`
+
+The use of a csl file for APA formatting of citations is necessary to ensure the desired format and should also be specified in **YAML**:
+
+`csl: "apa.csl"`
+
+
+
+The csl file (Citation Style Language) that you can find in the repository allows to correctly format in APA style your citations. 
+
+
+## Adding values in text directly form r objects
+
+```{r}
+#| echo = TRUE
+
+library(readxl)
+DATA <- read_xls(path = "data/Sara_dataset.xls")
+
+cor_pre <- cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")
+
+
+cor_pre
+```
+
+
+- correlazione tra Ansia pre e math quiz -> $r =$ `r cor_pre`
+
+````
+- correlazione tra Ansia pre e math quiz -> $r =$ `\r cor_pre\`
+````
+
+- `r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
+
+````
+- `r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
+````
+
+## Panels (visual)
+
+::: panel-tabset
+### From data (code)
+
+```{r}
+#| echo: true
+#| results: hide
+#| code-fold: false
+
+library(criticalESvalue)
+library(psych)
+library(psychTools)
+data("holzinger.swineford")
+Holz <- holzinger.swineford
+tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
+critical(tt)
+```
+
+### From data (output)
+
+```{r}
+#| echo: false
+#| results: markup
+
+library(criticalESvalue)
+library(psych)
+library(psychTools)
+data("holzinger.swineford")
+Holz <- holzinger.swineford
+tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
+critical(tt)
+```
+
+### From sample size (code)
+
+```{r}
+#| echo: true
+#| results: hide
+#| code-fold: false
+
+m1 <- 10
+m2 <- 15
+sd1 <- 5
+sd2 <- 4.25
+n <- 30
+critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
+```
+
+### From sample size (output)
+
+```{r}
+#| echo: false
+#| results: markup
+
+m1 <- 10
+m2 <- 15
+sd1 <- 5
+sd2 <- 4.25
+n <- 30
+critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
+```
+:::
+
+## Panels (source) 
+
+```markdown
+::: panel-tabset
+### From data (code)
+```
+```r
+#| echo: true
+#| results: hide
+#| code-fold: false
+
+library(criticalESvalue)
+library(psych)
+library(psychTools)
+data("holzinger.swineford")
+Holz <- holzinger.swineford
+tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
+critical(tt)
+```
+```markdown
+### From data (output)
+```
+```r
+#| echo: false
+#| results: markup
+
+library(criticalESvalue)
+library(psych)
+library(psychTools)
+data("holzinger.swineford")
+Holz <- holzinger.swineford
+tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
+critical(tt)
+```
+```markdown
+### From sample size (code)
+```
+
+```r
+#| echo: true
+#| results: hide
+#| code-fold: false
+
+m1 <- 10
+m2 <- 15
+sd1 <- 5
+sd2 <- 4.25
+n <- 30
+critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
+```
+
+```markdown
+### From sample size (output)
+```
+
+```r
+#| echo: false
+#| results: markup
+
+m1 <- 10
+m2 <- 15
+sd1 <- 5
+sd2 <- 4.25
+n <- 30
+critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
+```
+```markdown
+:::
+```
+
+## Cross-ref 
+
+Per capitoli e sezioni:
+
+```{.bash}
+# Introduction {#sec-introduction}
+
+Vedi @sec-introduction per maggiori informazioni.
+
+```
+
+Per immagini:
+
+```{.bash}
+
+![](fig.png){#fig-bho}
+
+Come visto in @fig-bho
+
+```
+
+O tabelle:
+
+```{.bash}
+| Col1 | Col2 | Col3 |
+|------|------|------|
+| A    | B    | C    |
+| E    | F    | G    |
+| A    | G    | G    |
+
+: descrizione tabella {#tbl-lettere}
+
+Vedi @tbl-lettere.
+```
+
+Oppure:
+
+```{.bash}
+::: {#tbl-lettere}
+
+| Col1 | Col2 | Col3 |
+|------|------|------|
+| A    | B    | C    |
+| E    | F    | G    |
+| A    | G    | G    |
+
+Descrizione tabella
+
+:::
+
+Vedi @tbl-lettere.
+
+```
+
+Oppure per tabelle create nei chunk:
+
+```{.bash}
+#| label: tbl-iris
+#| tbl-cap: "Iris Data"
+
+library(knitr)
+kable(head(iris))
+```
+
+
+
+![](figures/happydog.gif){fig-align="center"}
+
+## References
+
+::: {#refs custom-style="Bibliography"}
+:::

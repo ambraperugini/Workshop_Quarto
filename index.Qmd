@@ -1,0 +1,63 @@
+---
+title: "Quarto: write, code and reproduce"
+subtitle: "From reproducible reports to interactive presentations to online pages to share"
+author: "Ambra Perugini"
+# include-in-header: assets/header.html
+format: 
+  html:
+    self-contained: true
+    toc: true   
+    toc-depth: 3 
+    toc-expand: 3 
+    code-fold: false 
+    message: false
+    theme: journal
+editor: source
+embed-resources: true
+---
+
+### Slides:
+
+-   [01 - Introduction](Basics.html)
+
+### Basic git commands:
+
+- **git clone "HTTPS"** (to download to your computer a github repository)
+
+- **git status** (to control if your local folder is up tp date with the main github repository)
+
+- **git add .** (adds new local changes to the github repository)
+
+- **git commit -m"my_comment"** (adds the comment to what you will upload)
+
+- **git push** (everything added is pushed to the github repository, and if it' a public repo, it becomes public)
+
+- **git pull** (it downloads files that are ahead in the main github repo if your local folder is behind)
+
+### Useful links
+
+-   Website to install git [da qui](https://git-scm.com/install/)
+
+-   Quarto [**website**](https://quarto.org/docs/get-started/hello/rstudio.html){target="_blank"}
+
+Document types:
+
+-   HTML in Quarto [**website**](https://quarto.org/docs/output-formats/html-basics.html){target="_blank"}
+
+-   PDF in Quarto [**website**](https://quarto.org/docs/output-formats/pdf-basics.html){target="_blank"}
+
+-   Word in Quarto [**website**](https://quarto.org/docs/output-formats/ms-word.html){target="_blank"}
+
+Presentations ([overview](https://quarto.org/docs/presentations/){target="_blank"}):
+
+-   Revealjs in Quarto [**website**](https://quarto.org/docs/presentations/revealjs/){target="_blank"}
+
+-   Powerpoint in Quarto[**website**](https://quarto.org/docs/presentations/powerpoint.html){target="_blank"}
+
+-   PDF in Quarto[**website**](https://quarto.org/docs/presentations/beamer.html){target="_blank"}
+
+------------------------------------------------------------------------
+
+::: {style="font-size:11px;"}
+GitHub repository associated to the present course website: [https://github.com/ambraperugini/Workshop_Quarto](https://github.com/ambraperugini/Workshop_Quarto){target="_blank"}
+:::

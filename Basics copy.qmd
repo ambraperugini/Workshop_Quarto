@@ -1,0 +1,1046 @@
+---
+title: "Basics of Quarto"
+author: "Ambra Perugini"
+format:
+  html:
+    code-line-numbers: false
+    theme: journal
+    embed-resources: true
+    code-fold: true
+    code-overflow: wrap
+    toc: true
+    toc-expand: false
+execute:
+  echo: true
+  output: true
+editor: source
+---
+
+# Perché usare un linguaggio di markup?
+
+- Riproducibilità: permette di documentare e replicare analisi scientifiche
+
+- Automazione: genera report, articoli e presentazioni senza copiare e incollare
+
+- Flessibilità: esportazione in HTML, PDF, Word, e altro
+
+- Collaborazione: facilita il lavoro di gruppo e la condivisione dei risultati
+
+![](figures/collab.png){fig-align="center"}
+
+## Cos'è un linguaggio di markup?
+
+- Un sistema per strutturare e formattare testo con comandi testuali
+
+- Diverso da un word processor: il contenuto e la formattazione sono separati
+
+- Markdown è un esempio di linguaggio di markup semplice e leggibile
+
+![](figures/meq.png){fig-align="center"}
+
+## Come funziona?
+
+1. Scrivi il codice: un file di testo con sezioni in Markdown e blocchi di codice R
+
+2. Esegui il codice: genera risultati direttamente nel documento
+
+3. Compila il documento: scegli il formato di output (HTML, PDF, Word, presentazioni...)
+
+![](figures/outputs.png){fig-align="center"}
+
+---
+
+## Quarto vs RMarkdown: differenze principali {.smaller}
+
+| Caratteristica | **Quarto** | **RMarkdown** |
+|----------------|------------|----------------|
+| **Dipendenza dal linguaggio** | Indipendente; funziona con R, Python, Julia, ObservableJS | Legato principalmente a **R** e al sistema **knitr** |
+| **Estensione dei file** | `.qmd` | `.Rmd` |
+| **Motore di rendering** | Motore unificato Quarto (basato su Pandoc) | `rmarkdown` + `knitr` + Pandoc |
+| **Supporto multi-linguaggio** | Nativo e fluido (più linguaggi nello stesso documento) | Principalmente R, supporto Python più limitato |
+| **Progetti e siti web** | Supporto integrato per progetti, siti, libri, blog | Richiede pacchetti diversi (bookdown, blogdown, xaringan…) |
+| **Cross-reference e citazioni** | Integrate e semplici da usare | Spesso richiedono configurazioni o pacchetti aggiuntivi |
+| **Formati di output** | Sistema unificato (documenti, presentazioni, siti, libri) | Diversi pacchetti per diversi formati |
+| **Stile di configurazione** | YAML più chiaro e coerente | YAML più frammentato a seconda del formato |
+| **Prospettiva futura** | Moderno, attivamente sviluppato, consigliato per nuovi progetti | Mantenuto per compatibilità, evoluzione più lenta |
+
+### In sintesi  
+**Quarto è l’evoluzione moderna e unificata di RMarkdown**, più potente, più flessibile e non legata solo al linguaggio R.
+
+## Cosa faremo durante il corso?
+
+- Report dinamici con dati aggiornabili automaticamente
+
+- Presentazioni interattive con Reveal.js
+
+- Impostazione di un file per scrivere tesi e articoli in formato accademico (PDF, Word)
+
+- Esercitazione con presentazione finale
+
+![](figures/scale.jpeg){fig-align="center"}
+
+## Impostazione di un progetto in RStudio
+
+1. Apri **RStudio** e vai su `File -> New Project`
+
+2. Scegli **New Directory** e poi `Quarto Project``
+
+3. Seleziona la cartella di destinazione e dai un nome al progetto
+
+4. Clicca su **Create Project**
+
+![](figures/repo.png){fig-align="center"}
+
+# Struttura di un file Quarto (.qmd) 
+
+# 1. YAML
+
+## YAML: opzioni principali
+
+La testata **YAML** permette di definire:
+
+::: {style="font-size: .8em;"}
+
+- `title`: titolo del documento  
+- `subtitle`: sottotitolo  
+- `author`: autore/i  
+- `date`: data  
+- `output`: formato di output  
+- `theme`: tema grafico  
+- `fontcolor`: colore del testo  
+- `fig-width`: larghezza predefinita delle figure  
+- `code-fold`: piegatura del codice (`true/false`)  
+- `toc`: indice dei contenuti (`true/false`)  
+- `number-sections`: numerazione sezioni  
+
+:::
+
+## YAML: tipi di output
+
+- `html_document`
+- `pdf_document`
+- `word_document`
+- `revealjs`
+- `pptx`
+- `beamer`
+
+È possibile specificare più output in un solo yaml così che il documento venga renderizzato contemporaneamente in più formati.
+
+# 2. Corpo del documento 
+
+## Corpo del documento: Titoli e sottotitoli
+
+\
+
+\# Titolo principale
+
+\#\# Sottotitolo di primo livello
+
+\#\#\# Sottotitolo di secondo livello
+
+\#\#\#\# Sottotitolo di terzo livello
+
+
+## Corpo del documento: Paragrafi e formattazione del testo
+
+\
+
+Questo è un \*\*paragrafo di esempio\*\* con testo in grassetto.
+
+Si può anche usare \*corsivo\* o \`testo con font monospaziato\`.
+
+\
+
+Questo è un **paragrafo di esempio** con testo in grassetto.
+
+Si può anche usare *corsivo* o `testo con font monospaziato`.
+
+
+## Corpo del documento: Liste puntate e numerate
+
+\
+
+\- Elemento 1
+
+\- Elemento 2
+
+\- Elemento 3
+  
+\- Elemento 4
+
+\
+
+- Elemento 1
+
+- Elemento 2
+
+- Elemento 3
+  
+- Elemento 4
+
+## 3. Blocchi di codice
+
+Si usano per inserire codice ed eseguire analisi:
+
+- warning: se false, non fa vedere i warning del modello e/o funzione
+- include: nel repoprt o documento si vede oppure no l'ouput
+- eval: se true gira il codice, se false non gira proprio
+- echo: false -> non si vede il codice, se echo -> true si vede il codice che avete utilizzato
+
+## 3. Blocchi di codice
+
+\`\`\`r
+
+#| warning: false
+
+#| include: false
+
+#| eval: false
+
+#| echo: false
+
+summary(cars)
+
+\`\`\`
+
+Per settare opzioni dei chunk in **Quarto**, in stile YAML, utilizzare #| all'inizio di riga dentro il chunk. 
+
+## Inserire formule
+
+- Equazioni in una nuova riga: `$$…$$`
+- Equazione inline `$…$`
+
+:::{style="text-align: center;"}
+
+`$$ Y = \beta_{0} + \beta_{1} X $$`
+
+:::
+
+$$ Y = \beta_{0} + \beta_{1} X$$
+
+![](figures/math.jpeg){fig-align="center"}
+
+## Esecuzione e rendering
+1. Per inserire i chunk `Ctrl + Alt + I` (Windows) `Cmd + Option + I` (Mac)
+2. Per eseguire i blocchi di codice, usa `Ctrl + Invio` (Windows) o `Cmd + Invio` (Mac)
+3. Per generare il documento finale, clicca su `Render` (Quarto) o `Knit` (R Markdown)
+
+![](figures/vanellope.webp){fig-align="center"}
+
+## Applicazioni pratiche
+- **Report dinamici** con dati aggiornabili automaticamente
+- **Presentazioni scientifiche** interattive con Reveal.js
+- **Scrittura di tesi e articoli** in formato accademico (PDF, Word, LaTeX)
+- **Dashboard e documentazione interattiva** per la ricerca
+
+![](figures/FelixAggiustatutto.webp){fig-align="center"}
+
+## Parametri YAML {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- toc: true (table of content)
+
+- toc-title: Contents
+
+- toc-location: left
+
+- number-sections: true
+
+- embed-resources: true (per essere un html autonomo fuori dalla cartella)
+
+- execute: e si possono specificare per tutti i chunk dei settings di default
+
+- cache: ture (salva gli output dei chunk in un file per compilare più velocemente)
+
+- results: hide (nasconde l'output di un chunk, può essere settato anche a 'markup' per farli vedere in maniera ordinata)
+
+- echo: false (di default non fa vedere il codice dei chunk)
+
+- code-fold: true (per far vedere il codice cliccando su code)
+
+:::
+
+::: {.column width="50%"}
+
+es:
+
+```yaml
+---
+title: "my html"
+  format:
+    html:
+      toc: true
+      toc-title: Contents
+      toc-location: left
+      number-sections: true
+      embed-resources: true
+execute:
+  cache: true
+  results: hide
+  echo: false
+---
+```
+
+:::
+
+::::
+
+## Chunks
+
+Esempi in chunk r
+
+\```{r}
+
+\#| results: hide
+
+\#| echo: false
+
+\#| label: fig-nome_figura
+
+\#| fig-width: 8
+
+\#| fig-height: 4
+
+\#| fig-cap: Caption della vostra figura. 
+
+\```
+
+
+## Colonne {.scrollable}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Contenuto 1:
+
+- Punto 1
+
+- Punto 2
+
+- Punto 3
+
+:::
+
+::: {.column width="50%"}
+
+Contenuto 2:
+
+- Punto 1
+
+- Punto 2
+
+- Punto 3
+
+:::
+
+::::
+
+```markdown
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+:::
+
+::: {.column width="50%"}
+
+
+:::
+
+::::
+```
+
+## Testo colorato e immagini
+
+Io <span style="color:#ff4da6;">amo</span> Quarto!
+
+```markdown
+Io <span style="color:red;">amo</span> Quarto!
+```
+Avete visto varie immagini, ecco come le inserisco:
+
+```markdown
+![](figures/magic.png){fig-align="center"}
+```
+
+![](figures/magic.jpeg){fig-align="center"}
+
+## Aggiungere citazioni (pt.1)
+
+
+Questo articolo mi piace molto ed è stato scritto da @scheel2021hypothesis, [@scheel2021hypothesis].
+
+
+```markdown
+@scheel2021hypothesis per cit. nel testo
+[@scheel2021hypothesis] per cit. tra parentesi
+```
+
+
+Le references vengono poi in automatico messe per esteso alla fine del fine. Per creare un file .bib, aprire un nuovo file di testo e salvarlo con l'estensione .bib. Importante inserire nello **YAML** la voce:
+
+`bibliography: "nome del file"`
+
+`csl: "apa.csl"`
+
+
+
+## Aggiungere citazioni (pt.2)
+
+
+
+Il file csl (Citation Style Language) che trovate in cartella vi permette di formattare correttamente in stile apa le citazioni
+
+```{rmarkdown}
+
+:::{style="font-size: .8em; text-align: left"}
+
+Le references vengono poi in automatico messe per esteso alla fine del fine.
+
+Per creare un file .bib, aprire un nuovo file di testo e salvarlo con l'estensione .bib
+
+Importante inserire nello YAML la voce `bibliography: "nome del file"`
+
+:::
+
+```
+
+## Valori nel testo presi da oggetti r
+
+```{r}
+#| echo = TRUE
+
+library(readxl)
+DATA <- read_xls(path = "data/Sara_dataset.xls")
+
+cor_pre <- cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")
+
+
+cor_pre
+```
+
+Elenco delle correlazioni:
+
+- correlazione tra Ansia pre e math quiz -> $r =$ `r cor_pre`
+
+````
+- correlazione tra Ansia pre e math quiz -> $r =$ `\r cor_pre\`
+````
+
+- `r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
+
+````
+- `r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
+````
+
+## Pannelli (visual)
+
+::: panel-tabset
+### From data (code)
+
+```{r}
+#| echo: true
+#| results: hide
+
+library(criticalESvalue)
+library(psych)
+library(psychTools)
+data("holzinger.swineford")
+Holz <- holzinger.swineford
+tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
+critical(tt)
+```
+
+### From data (output)
+
+```{r}
+#| echo: false
+#| results: markup
+
+library(criticalESvalue)
+library(psych)
+library(psychTools)
+data("holzinger.swineford")
+Holz <- holzinger.swineford
+tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
+critical(tt)
+```
+
+### From sample size (code)
+
+```{r}
+#| echo: true
+#| results: hide
+
+m1 <- 10
+m2 <- 15
+sd1 <- 5
+sd2 <- 4.25
+n <- 30
+critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
+```
+
+### From sample size (output)
+
+```{r}
+#| echo: false
+#| results: markup
+
+m1 <- 10
+m2 <- 15
+sd1 <- 5
+sd2 <- 4.25
+n <- 30
+critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
+```
+:::
+
+## Pannelli (source) {.scrollable}
+
+```markdown
+::: panel-tabset
+### From data (code)
+```
+```r
+#| echo: true
+#| results: hide
+
+library(criticalESvalue)
+library(psych)
+library(psychTools)
+data("holzinger.swineford")
+Holz <- holzinger.swineford
+tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
+critical(tt)
+```
+```markdown
+### From data (output)
+```
+```r
+#| echo: false
+#| results: markup
+
+library(criticalESvalue)
+library(psych)
+library(psychTools)
+data("holzinger.swineford")
+Holz <- holzinger.swineford
+tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
+critical(tt)
+```
+```markdown
+### From sample size (code)
+```
+
+```r
+#| echo: true
+#| results: hide
+
+m1 <- 10
+m2 <- 15
+sd1 <- 5
+sd2 <- 4.25
+n <- 30
+critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
+```
+
+```markdown
+### From sample size (output)
+```
+
+```r
+#| echo: false
+#| results: markup
+
+m1 <- 10
+m2 <- 15
+sd1 <- 5
+sd2 <- 4.25
+n <- 30
+critical_t2sp(m1 = m1, m2 = m2, sd1 = sd1, sd2 = sd2, n = n)
+```
+```markdown
+:::
+```
+
+# CSS (extra)
+
+## Cos'è un file CSS?
+
+- CSS (Cascading Style Sheets) è un linguaggio usato la formattazione di un documento scritto in HTML (utilizzabile anche per revealjs).
+
+- I file CSS hanno estensione .css e contengono regole di stile applicabili agli elementi HTML.
+
+- Permette di separare il contenuto dalla presentazione dalle parti di formattazione, migliorando la manutenibilità del codice.
+
+Come inserirlo nel file quarto:
+
+```
+format:
+  html:
+    css: stile.css
+```
+
+## Esempio illustrativo
+
+Il file .css è come un foglio di testo dove inserire i parametri di formattazione del vostro file html. Un brevissimo esempio:
+
+```
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+h1 {
+  color: darkred;
+  text-align: center;
+}
+```
+
+## CSS direttamente in Quarto
+
+![](figures/css.png)
+
+## Getting started (YAML) {.smaller}
+
+Come per l'html, potete specificare altri parametri nello YAML:
+
+. . .
+
+-   toc,
+-   embed-resources,
+-   incremental (true or false) per avere punti dell'elenco puntato che compaiono uno per volta)
+
+. . .
+
+-   slide-number (c/t per current slide / totale, true e basta mette il numero della singola slide)
+-   code-fold: true
+-   [Più opzioni](https://quarto.org/docs/reference/formats/presentations/revealjs.html)
+
+per mettere una pausa tra due parti di testo e farle apparire in differita: `. . .`
+
+## Cosa si può aggiungere? {transition="convex"}
+
+Volessi mettere una nota^[Una nota numerata che finisce in fondo]
+
+Si va così: `^[Una nota numerata che finisce in fondo]` si mette dove va il numeretto nel testo
+
+::: {.incremental}
+-   {.smaller} dopo il titolo per rimpicciolire contenuto di una slide
+-   {.scrollable} dopo il titolo per rendere la slide scorribile
+-   {.unlisted} dopo il titolo per non inserire nel toc una slide
+:::
+
+## {.unlisted}
+
+-   footer (nota a pie di pagina in tutte le slide se nello YAML, o nelle singole slides)
+-   e molto ancora
+
+:::{.footer}
+
+Qui metto qualcosa come footer
+
+:::
+
+```
+:::{.footer}
+
+Qui metto qualcosa come footer
+
+:::
+```
+
+::: aside
+
+Qui metto qualcosa come nota
+
+:::
+
+```
+::: aside
+
+Qui metto qualcosa come nota
+
+:::
+```
+
+```
+::: {.notes}
+Speaker notes go here.
+:::
+```
+
+## {.unlisted}
+
+::: {style="text-align: center;"}
+io sono centrato
+:::
+
+```
+::: {style="text-align: center;"}
+io sono centrato
+:::
+```
+
+::: {style="text-align: center; font-size: 2em;"}
+io sono più grande
+:::
+
+```
+::: {style="text-align: center; font-size: 2em;"}
+io sono più grande
+:::
+```
+
+::: {style="text-align: center; font-size: 2em; color: pink;"}
+io sono più grande e rosa
+:::
+
+```
+::: {style="text-align: center; font-size: 2em; color: pink;"}
+io sono più grande e rosa
+:::
+```
+
+## Themes {.smaller transition="convex"}
+
+Da inserire nello YAML:
+
+:::{style="color:purple;"}
+- beige
+- blood
+- dark
+- default
+- league
+- moon
+- night
+- serif
+- simple
+- sky
+- solarized
+:::
+
+## Diversi tipi di transizione
+
+- transition="convex"
+
+- transition="concave"
+
+- transition="fade"
+
+- transition="slide"
+
+- transition="zoom"
+
+Vanno messi dopo il titolo della slide! Per esempio \#\# Il mio titolo {.smaller}
+
+## Evidenziare righe di codice {.smaller}
+
+```{.r code-line-numbers="|1|9"}
+x <- rnorm(30,10,2)
+y <- x + rnorm(30,0,1)
+z <- y*.5 + rnorm(30,0,1)
+cor(x,y)
+cor(y,z)
+cor(x,z)
+plot(x,y)
+plot(y,z)
+plot(x,z)
+```
+
+
+`code-line-numbers="7,9"` per evidenziare solo 7 e 9
+
+`code-line-numbers="7|9"` per evidenziare prima 7 e poi 9
+
+`code-line-numbers="|7|9"` per avere prima tutto, poi 7 e poi 9
+
+
+## Evidenziare righe di codice {.unlisted}
+:::{.fragment .fade-in-then-out}
+![](figures/high.png)
+:::
+
+## Output display {.scrollable}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+
+x <- rnorm(30,10,2)
+y <- x + rnorm(30,0,1)
+z <- y*.5 + rnorm(30,0,1)
+cor(x,y)
+cor(y,z)
+cor(x,z)
+plot(x,y)
+plot(y,z)
+plot(x,z)
+```
+
+## Output display {.unlisted}
+
+E' possibile far vedere l'output del codice in diversi modi usando dopo #| output-location :
+
+- fragment (visibile dopo che si va avanti con la slide cliccando)
+
+- slide (in una nuova slide)
+
+- column (in colonna accanto al codice)
+
+- column-fragment (in colonna accanto al codice non appena si clicca per andare avanti)
+
+## Colorare singola slide {background-color="#f984ad"}
+
+Basta aggiungere dopo il titolo della slide {background-color="#f984ad"}
+
+## Posizione e dimensioni immagine {.smaller}
+
+`![](figures/letsgo.jpeg){.absolute bottom=0 right=50 width="300" height="300"}`
+
+![](figures/letsgo.jpeg){.absolute bottom=0 right=50 width="250" height="150"}
+
+## Animazione {auto-animate="true"}
+
+```r
+
+x <- rnorm(30,10,2)
+y <- x + rnorm(30,0,1)
+z <- y*.5 + rnorm(30,0,1)
+
+```
+
+
+## Animazione {.unlisted auto-animate="true"} 
+
+```r
+
+x <- rnorm(30,10,2)
+y <- x + rnorm(30,0,1)
+z <- y*.5 + rnorm(30,0,1)
+
+cor(x,y)
+cor(y,z)
+cor(x,z)
+plot(x,y)
+plot(y,z)
+plot(x,z)
+```
+
+{auto-animate="true"} dopo il titolo
+
+## Autoanimazione 2 {.unlisted auto-animate="true"}
+
+Questo testo è qui ma si sposterà
+
+## Autoanimazione 2 {.unlisted auto-animate="true"} 
+
+\
+
+Per lasciare il posto a questo testo
+
+\
+
+Questo testo è qui ma si sposterà
+
+## {.unlisted}
+
+Per inserire altri tipi di animazione o avere più informazioni su impostazioni avanzate revealjs:
+
+\
+
+::: {style="text-align: center;"}
+[link al sito](https://quarto.org/docs/presentations/revealjs/advanced.html){style="color:purple;"}
+:::
+
+
+## Iniziamo
+
+- per la scrittura della tesi utilizzeremo Quarto book
+- possibilità di creare indice cliccabile
+- integrazione testo e codice e/o grafici
+- riproducibilità e semplicità di modifica delle analisi
+- possibilità di cross-reference di capitoli, immagini, equazioni ecc.
+
+## Tipi di output
+
+- HTML
+- PDF
+- MS Word
+- EPUB
+- AsciiDoc
+
+## Getting started (new folder)
+
+::: {style="font-size: 0.6em;"}
+
+1. Creare un progetto quarto book da dentro RStudio.
+
+2. Inserire nel file _quarto.yml:
+
+:::
+
+``` yaml
+project:
+  type: book
+
+book:
+  title: "La mia bellissima tesi"
+  author: "Nome Bellissimo"
+  date: "4/3/2025"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  pdf:
+    documentclass: book
+    papersize: a4
+    fontsize: 12pt
+    margin-left: 1.5in   # Adjust margins for binding
+    margin-right: 1in
+    toc: true            # Table of Contents
+    number-sections: true
+    colorlinks: true    
+    fontfamily: times
+
+
+execute:
+  cache: true # Se avete modelli pesanti da girare
+
+```
+
+## Creare cartelle ordinate 
+
+::: {style="font-size: 0.8em;"}
+
+Per ogni capitolo si può fare una cartella dentro la cartella del progetto richiamando nel file _quarto.yml la directory giusta e si può aggiungere anche l'appendice o aggiungere footer ad ogni pagina:
+
+:::
+
+``` yaml
+project:
+  type: book
+
+book:
+  title: "La mia bellissima tesi"
+  author: "Nome Bellissimo"
+  date: `r Sys.Date()`"
+  page-footer: "Copyright 2025, Tesista Dell'Anno"
+    border: false
+  chapters:
+    - index.qmd
+    - intro/intro.qmd
+    - summary/summary.qmd
+    - references.qmd
+  appendices:
+    - tools.qmd
+    - resources.qmd
+    
+```
+
+## Reference section
+
+\
+
+Quarto book creates authomatically the file references.qmd con dentro:
+
+\
+
+``` {.bash filename="References"}
+# References {.unnumbered}
+
+::: {#refs}
+:::
+```
+
+
+
+\
+
+Ma lo potete mettere dove volete se preferite.
+
+## Cross-ref 
+
+Per capitoli e sezioni:
+
+```{.bash}
+# Introduction {#sec-introduction}
+
+Vedi @sec-introduction per maggiori informazioni.
+
+```
+
+Per immagini:
+
+```{.bash}
+
+![](fig.png){#fig-bho}
+
+Come visto in @fig-bho
+
+```
+
+O tabelle:
+
+```{.bash}
+| Col1 | Col2 | Col3 |
+|------|------|------|
+| A    | B    | C    |
+| E    | F    | G    |
+| A    | G    | G    |
+
+: descrizione tabella {#tbl-lettere}
+
+Vedi @tbl-lettere.
+```
+
+Oppure:
+
+```{.bash}
+::: {#tbl-lettere}
+
+| Col1 | Col2 | Col3 |
+|------|------|------|
+| A    | B    | C    |
+| E    | F    | G    |
+| A    | G    | G    |
+
+Descrizione tabella
+
+:::
+
+Vedi @tbl-lettere.
+
+```
+
+Oppure per tabelle create nei chunk:
+
+```{.bash}
+#| label: tbl-iris
+#| tbl-cap: "Iris Data"
+
+library(knitr)
+kable(head(iris))
+```
+
+
+## Per concludere
+
+Iniziate ad impostare il vostro progetto di tesi e alla fine se avete tempo provate qualche cross-reference.
+
+![](figures/happydog.gif){fig-align="center"}
+
+## References
+
+::: {#refs custom-style="Bibliography"}
+:::
