@@ -20,6 +20,8 @@ embed-resources: true
 
 -   [01 - Introduction](Basics.html)
 
+-   [02 - Presentations](Presentations.html)
+
 ### Basic git commands:
 
 - **git clone "HTTPS"** (to download to your computer a github repository)
@@ -36,7 +38,7 @@ embed-resources: true
 
 ### Useful links
 
--   Website to install git [da qui](https://git-scm.com/install/)
+-   Website to install git [**da qui**](https://git-scm.com/install/){target="_blank"}
 
 -   Quarto [**website**](https://quarto.org/docs/get-started/hello/rstudio.html){target="_blank"}
 
@@ -48,13 +50,20 @@ Document types:
 
 -   Word in Quarto [**website**](https://quarto.org/docs/output-formats/ms-word.html){target="_blank"}
 
-Presentations ([overview](https://quarto.org/docs/presentations/){target="_blank"}):
+Presentations ([**overview**](https://quarto.org/docs/presentations/){target="_blank"}):
 
 -   Revealjs in Quarto [**website**](https://quarto.org/docs/presentations/revealjs/){target="_blank"}
 
 -   Powerpoint in Quarto[**website**](https://quarto.org/docs/presentations/powerpoint.html){target="_blank"}
 
 -   PDF in Quarto[**website**](https://quarto.org/docs/presentations/beamer.html){target="_blank"}
+
+### Useful templates
+
+-   [**PDF**](https://github.com/filippogambarota/literate-programming/tree/main/examples/apaquarto-example){target="_blank"} template formatted in APA style 
+
+-   [**Website**](https://github.com/feracotommaso/feracotommaso.github.io/tree/main){target="_blank"} example from a friend :)
+
 
 ------------------------------------------------------------------------
 

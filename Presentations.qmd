@@ -1,0 +1,451 @@
+---
+title: "Revealjs"
+author: "Ambra Perugini"
+format:
+  revealjs:
+    code-line-numbers: false
+    theme: default
+    slide-number: c/t
+    transition: slide
+    background-transition: fade
+    footer: "ambra.perugini@phd.unipd.it"
+    logo: "figures/psicostatLogo.png"
+    incremental: false
+    self-contained: true
+    embed-resources: true
+    code-fold: true
+    code-summary: "Codice"
+    code-overflow: wrap
+    toc: true 
+    bibliography: bibliography.bib
+    csl: apa.csl
+    include-in-header:
+          - text: |
+              <style>
+              #title-slide .title {
+                font-size: 3.2em;
+                color: #9B0014;
+              }
+              .slide-logo {
+                height: 60px !important;
+                max-height: none !important;
+                position: absolute !important;
+                bottom: 10px !important;
+                right: 10px !important;
+                top: unset !important;
+                left: unset !important;
+              }
+              </style>
+
+
+execute:
+  echo: true
+  output: true
+editor: source
+---
+
+## Let's start!
+
+```{r}
+#| echo: false
+
+rm(list=ls())
+
+
+```
+
+-   For the presentation we will use revealjs
+-   Super flexible
+-   Dynamic slides
+-   You can also put columns, panels and show your code or create graphs 
+
+## YAML 
+
+``` yaml
+---
+title: "Revealjs"
+author: "Ambra Perugini"
+format:
+  revealjs:
+    code-line-numbers: false
+    theme: default
+    slide-number: c/t
+    transition: slide
+    background-transition: fade
+    footer: "ambra.perugini@phd.unipd.it"
+    logo: "figures/psicostatLogo.png"
+    incremental: false
+    self-contained: true
+    embed-resources: true
+    code-fold: true
+    code-summary: "Codice"
+    code-overflow: wrap
+    toc: true 
+    bibliography: bibliography.bib
+    csl: apa.csl
+execute:
+  echo: true
+  output: true
+editor: source
+---
+
+```
+
+## YAML {.smaller .unlisted}
+
+Many things can be specified in the YAML:
+
+. . .
+
+-   toc,
+-   embed-resources,
+-   incremental (true or false) to have lists showing one point at the time
+
+. . .
+
+-   slide-number (`c/t` -> current slide / total number of slides, `true` shows only the current slide number)
+-   code-fold: true
+-   [More options](https://quarto.org/docs/reference/formats/presentations/revealjs.html)
+
+If you want to separate two parts of a slide: `. . .`
+
+## What can you add? {transition="convex"}
+
+Notes^[That goes to the bottom]
+
+In this way: `^[That goes to the bottom]`
+
+You can also set up single slides formats
+
+::: {.incremental}
+-   {.smaller} to have smaller text in one slide
+-   {.scrollable} to make it scrollable to prevent content overflow
+-   {.unlisted} to not show the slide title in the toc
+:::
+
+## More features {.unlisted}
+
+:::{.footer}
+
+Here I put something as a footer
+
+:::
+
+```
+:::{.footer}
+
+Here I put something as a footer
+
+:::
+```
+
+::: aside
+
+Here I put something as a note
+
+
+:::
+
+```
+::: aside
+
+Here I put something as a note
+
+:::
+```
+::: {style="font-size: .8em;"}
+Then to have speaker notes in your presentation:
+:::
+
+
+```
+::: {.notes}
+Speaker notes go here.
+:::
+```
+
+## {.unlisted}
+
+Here as well you can use the same text formatting:
+
+::: {style="text-align: center;"}
+I am centered
+:::
+
+```
+::: {style="text-align: center;"}
+I am centered
+:::
+```
+
+::: {style="text-align: center; font-size: 2em;"}
+I am bigger
+:::
+
+```
+::: {style="text-align: center; font-size: 2em;"}
+I am bigger
+:::
+```
+
+::: {style="text-align: center; font-size: 2em; color: pink;"}
+I am bigger and pink
+:::
+
+```
+::: {style="text-align: center; font-size: 2em; color: pink;"}
+I am bigger and pink
+:::
+```
+
+## Themes {.smaller transition="convex"}
+
+To put in your YAML:
+
+:::{style="color:purple;"}
+- beige
+- blood
+- dark
+- default
+- league
+- moon
+- night
+- serif
+- simple
+- sky
+- solarized
+:::
+
+## Different transition types
+
+- transition="convex"
+
+- transition="concave"
+
+- transition="fade"
+
+- transition="slide"
+
+- transition="zoom"
+
+To put between brakets after the title of the slide.
+
+## Highliting specific code lines
+
+```{.r code-line-numbers="|1|9"}
+x <- rnorm(30,10,2)
+y <- x + rnorm(30,0,1)
+z <- y*.5 + rnorm(30,0,1)
+cor(x,y)
+cor(y,z)
+cor(x,z)
+plot(x,y)
+plot(y,z)
+plot(x,z)
+```
+
+::: {style="font-size: .8em;"}
+`code-line-numbers="7,9"` to highlight only 7 and 9
+
+`code-line-numbers="7|9"` to highlight first 7 and then 9
+
+`code-line-numbers="|7|9"` to show first everything, and then 7 and later 9
+
+You can use different combinations to obtain the desired effect.
+:::
+
+## Highliting specific code lines {.unlisted}
+:::{.fragment .fade-in-then-out}
+![](figures/high.png)
+:::
+
+## Output display {.scrollable}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| code-fold: false
+
+x <- rnorm(30,10,2)
+y <- x + rnorm(30,0,1)
+z <- y*.5 + rnorm(30,0,1)
+cor(x,y)
+cor(y,z)
+cor(x,z)
+plot(x,y)
+plot(y,z)
+plot(x,z)
+```
+
+## Output display {.unlisted}
+
+Using #| output-location you can show code in different ways:
+
+- fragment (visible after you click again)
+
+- slide (in a new slide)
+
+- column (in a column next to the code)
+
+- column-fragment (in a column next to the code once you click again)
+
+## You can also change background color of a single slide {.unlisted background-color="#f984ad"}
+
+by adding after the title: {background-color="#f984ad"}
+
+## Same images formatting {.smaller}
+
+`![](figures/letsgo.jpeg){.absolute bottom=0 right=50 width="300" height="300"}`
+
+![](figures/letsgo.jpeg){.absolute bottom=0 right=50 width="250" height="150"}
+
+## Animations {auto-animate="true"}
+
+```r
+
+x <- rnorm(30,10,2)
+y <- x + rnorm(30,0,1)
+z <- y*.5 + rnorm(30,0,1)
+
+```
+
+
+## Animations {.unlisted auto-animate="true"} 
+
+```r
+
+x <- rnorm(30,10,2)
+y <- x + rnorm(30,0,1)
+z <- y*.5 + rnorm(30,0,1)
+
+cor(x,y)
+cor(y,z)
+cor(x,z)
+plot(x,y)
+plot(y,z)
+plot(x,z)
+```
+
+{auto-animate="true"} after the slide title
+
+## Animation 2 {.unlisted auto-animate="true"}
+
+This text is now here but it will move
+
+## Animation 2 {.unlisted auto-animate="true"} 
+
+\
+
+To leave space for this new text
+
+\
+
+This text is now here but it will move
+
+## {.unlisted}
+
+To have more advanced information about animations or revealjs in general:
+
+\
+
+::: {style="text-align: center;"}
+[link to the website](https://quarto.org/docs/presentations/revealjs/advanced.html){style="color:purple;"}
+:::
+
+```
+::: {style="text-align: center;"}
+[link to the website](https://quarto.org/docs/presentations/revealjs/advanced.html){style="color:purple;"}
+:::
+```
+
+## Excercise {.smaller}
+
+**Create a presentation with the following elements:**
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+-   Download "Sara_dataset.xlsx" or use a dataset of your own
+
+-   Do some descriptive statistics of the variables and show the results
+
+-   Set a theme
+
+-   Insert slide numbers
+
+-   Use some transitions between slides
+
+-   Insert a table of content (toc) 
+
+-   Change toc name
+
+
+:::
+
+::: {.column width="50%"}
+
+-   Remove some slides form the toc
+
+-   Make sure that the file is self-contained (embed-resources in YAML)
+
+-   Insert a foot note
+
+-   Insert some columns
+
+-   Use incremental lists
+
+-   Insert an image and format it
+
+-   Insert citations with a .bib file
+
+
+:::
+
+::::
+
+## Excercise Extras {.unlisted .smaller}
+
+-   Modify the dimension and color of some text
+
+-   Show some code and highlight different code sections
+
+-   Insert an animation
+
+-   Recall in the text some objects of the r environment (values)
+
+-   Add a formula with the $ and cross-reference it
+
+-   Create an image from data
+
+-   Add fig-cap to an image
+
+-   Add figure label and reference to it in the text
+
+-   Adjust image parameters within the chunk
+
+
+## Sara_dataset description {.smaller}
+
+- gender of participants (gender: 1 = female, 2 = male)
+
+- type of bachelor’s degree obtained (major: 1 = psychology, 2 = medicine, 3 = biology, 4 = sociology, 5 = economics)
+
+- experimental condition (cond: 1 = easy, …, 4 = impossible)
+
+- self-assessment of fear of mathematics (phobia) on a 0–10 scale
+
+- number of mathematics courses previously taken (prevmath)
+
+- score on a math pre-test (mathquiz)
+
+- score on a statistics test (statquiz)
+
+- self-measured heart rate under normal conditions (hr base), before the test (hr pre), and after the test (hr post)
+
+- scores on an anxiety test under normal conditions (anx base), before the test (anx pre), and after the test (anx post)
+
+
+
