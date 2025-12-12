@@ -421,14 +421,14 @@ cor_pre
 - correlazione tra Ansia pre e math quiz -> $r =$ `r cor_pre`
 
 ```{.bash}
-- correlazione tra Ansia pre e math quiz -> $r =$ `r cor_pre`
+- correlazione tra Ansia pre e math quiz -> $r =$ `\r cor_pre`
 ```
 
 - `r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
 
-````
-- `r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
-````
+```{.bash}
+- `\r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
+```
 
 ## Panels (visual)
 
