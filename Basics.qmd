@@ -232,8 +232,8 @@ $$ Y = \beta_{0} + \beta_{1} X$$
 Easy shortcuts
 
 1. To insert chunks `Ctrl + Alt + I` (Windows) `Cmd + Option + I` (Mac)
-2. Per eseguire i blocchi di codice, usa `Ctrl + Invio` (Windows) o `Cmd + Invio` (Mac)
-3. Per generare il documento finale, clicca su `Render` (Quarto)
+2. To execute code chunks, use `Ctrl + Enter` (Windows) o `Cmd + Enter` (Mac)
+3. To generate the final output, click on `Render` 
 
 
 ## Columns
@@ -418,10 +418,10 @@ cor_pre
 ```
 
 
-- correlazione tra Ansia pre e math quiz -> $r =$ `r cor_pre`
+- Correlation between Anxiety pre and math quiz -> $r =$ `r cor_pre`
 
 ```{.bash}
-- correlazione tra Ansia pre e math quiz -> $r =$ `\r cor_pre`
+- Correlation between Anxiety pre and math quiz -> $r =$ `\r cor_pre`
 ```
 
 - `r cor(DATA$anx_pre, DATA$mathquiz, use = "complete.obs")`
